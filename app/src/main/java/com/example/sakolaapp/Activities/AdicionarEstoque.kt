@@ -68,13 +68,15 @@ class AdicionarEstoque : AppCompatActivity() {
 
                     storage.downloadUrl.addOnSuccessListener {   //Método para pegar o link da imagem salva no Storage
 
-                        val img =
-                            it.toString()     //Recupera o link da imagem retornado pelo método
+                        val img = it.toString()     //Recupera o link da imagem retornado pelo método
 
                         val nome = NomeItemEstoque.text.toString()  //Recupera o nome digitado
 
                         val qtd = QtdItemEstoque.text.toString()
                             .toInt()    //Recupera a quantidade digitada
+
+
+                        val cod = Cod_Estoque.text.toString()
 
                         val estoque = EstoqueFirebase(
                             img,
@@ -84,7 +86,7 @@ class AdicionarEstoque : AppCompatActivity() {
 
 
                         //Função para salvar os dados do estoque no Firebase Database
-                        firestore.child(Cod_Estoque.text.toString()).setValue(estoque)
+                        firestore.child(cod).setValue(estoque)
 
                             .addOnCompleteListener {
                                 Toast.makeText(

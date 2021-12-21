@@ -72,21 +72,20 @@ class ComprarProduto : AppCompatActivity() {
         TotalPrice.setOnClickListener {
 
             //Função para calcular o valor total dos itens no carrinho
-            val totalPrice = price*count
+            val totalPrice = price * count
 
             //Chamada da classe modelo AdicionarCarrinhoFirebase e passagem dos valores
-            val carrinho = AdicionarCarrinhoFirebase(nome!!, count.toString(), totalPrice.toString(), img!!)
+            val carrinho = AdicionarCarrinhoFirebase(nome!!, count, totalPrice.toString(), img!!)
 
             //Função para salvar os dados no Database
             Database.setValue(carrinho)
                 .addOnCompleteListener {
-
                     //Abrir a activity Finalizar Pedido e finalizar essa activity
                     val intent = Intent(this, FinalizarPedido::class.java)
                     startActivity(intent)
                     this.finish()
                 }
-                    //Tratamento de erros
+                //Tratamento de erros
                 .addOnFailureListener {
                     Toast.makeText(this, "Not Ok", Toast.LENGTH_SHORT).show()
                 }
